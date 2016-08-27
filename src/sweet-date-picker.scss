@@ -1,0 +1,212 @@
+@import "sass/mixins";
+
+$mdp-color: #42a5f5;
+$gutter: 10px;
+$part-width: 120px;
+$part-gutter: 4px;
+$parts: 3;
+$container-width: ($part-width * 3) + ($part-gutter * ($parts * 2));
+$modal-width: $container-width + ($gutter * 2);
+
+.mdp-modal {
+  box-sizing: border-box;
+  position: fixed;
+  z-index: 999;
+  font-family: 'Open Sans', sans-serif;
+  left: 50%;
+  top: 50%;
+  transform: translateY(50%) translateX(-50%);
+  line-height: 1;
+  background: #fff;
+  padding: $gutter;
+  transition: 0.3s ease-in-out;
+
+  &.shown {
+    transform: translateY(-50%) translateX(-50%);
+  }
+
+   .mdp-container {
+      margin: 0 -4px;
+     box-sizing: border-box;
+     white-space: nowrap;
+
+     .mdp-date-segment-col {
+       padding: 0 #{$part-gutter};
+       box-sizing: border-box;
+       display: inline-block;
+     }
+
+      .mdp-date-segment {
+        box-sizing: border-box;
+        width: $part-width;
+
+        vertical-align: top;
+        padding: 5px 15px;
+        text-align: left;
+        color: #000;
+        white-space: normal;
+
+        &:hover {
+          background: #42a5f5;
+          color: #fff;
+
+          input {
+            color: #fff;
+            &:disabled {
+              color: #fff;
+            }
+          }
+
+          button {
+            visibility: visible;
+          }
+
+        }
+
+        .metric {
+          font-size: 35px;
+          font-weight: 600;
+          background: transparent;
+          padding: 0 0 10px 0;
+          width: 100%;
+          border: 0;
+          line-height: 1;
+          &:disabled {
+            color: #000000;
+          }
+        }
+
+        .comment {
+          text-transform: uppercase;
+          font-size:  14px;
+          height: 14px;
+        }
+
+        button {
+          background: transparent;
+          box-shadow: none;
+          border-radius: 0;
+          border: 0;
+          width: 100%;
+          visibility: hidden;
+          cursor: pointer;
+          height: 25px;
+          line-height: 25px;
+
+           &.up:before {
+             font-family: FontAwesome;
+             content: "\f0d8";
+             color: #fff;
+             display: block;
+           }
+
+          &.down:before {
+             font-family: FontAwesome;
+             content: "\f0d7";
+             color: #fff;
+            display: block;
+           }
+
+          &.up:hover:before {
+            color: #000000;
+          }
+
+          &.down:hover:before {
+            color: #000000;
+          }
+
+
+        }
+
+    }
+
+  }
+
+  .mdp-actions {
+    text-align: center;
+    margin-left: $gutter * -1;
+    margin-right: $gutter * -1;
+    margin-top: $gutter;
+
+    .mdp-btn-wrapper {
+      box-sizing: border-box;
+      display: table-cell;
+      padding-left: $gutter;
+      padding-right: $gutter;
+      float: left;
+      position: relative;
+
+      /* one item */
+      &:nth-child(1):nth-last-child(1) {
+        width: 100%;
+      }
+
+      /* two items */
+      &:nth-child(1):nth-last-child(2),
+      &:nth-child(2):nth-last-child(1) {
+        width: 50%;
+      }
+    }
+
+    button {
+      border: 0;
+      box-shadow: none;
+      background: $mdp-color;
+      color: #FFF;
+      border-radius: 0;
+      height: 40px;
+      display: block;
+      width: 100%;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+  }
+
+}
+
+.mdp-backdrop {
+  background: rgba(0,0,0,0.6);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 998;
+}
+
+@media (max-width: $modal-width) {
+  .mdp-modal {
+    width: 100%;
+    .mdp-container {
+      width: auto;
+      .mdp-date-segment-col {
+        @for $i from 1 through 4 {
+          @include sibling-width($i);
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 301px) and (max-width: $modal-width) {
+  .mdp-modal .mdp-container .mdp-date-segment {
+    .metric {
+      font-size: 26px;
+    }
+    .comment {
+      font-size: 12px;
+    }
+  }
+}
+
+@media (max-width: 300px) {
+  .mdp-modal .mdp-container .mdp-date-segment {
+    .metric {
+      font-size: 20px;
+    }
+    .comment {
+      font-size: 12px;
+    }
+  }
+}

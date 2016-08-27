@@ -1,0 +1,26 @@
+{
+  "name": "sweet-date-picker",
+  "version": "0.1.0",
+  "authors": [
+    "Jack Powell"
+  ],
+  "description": "Modern, Flexible Date Picker",
+  "keywords": [
+    "datepicker",
+    "date",
+    "picker",
+    "modern"
+  ],
+  "homepage": "https://github.com/coderjp/sweet-date-picker",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "moment": "~2.14.1"
+  }
+}

@@ -1,0 +1,157 @@
+.mdp-modal {
+  box-sizing: border-box;
+  position: fixed;
+  z-index: 999;
+  font-family: 'Open Sans', sans-serif;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translateY(50%) translateX(-50%);
+      -ms-transform: translateY(50%) translateX(-50%);
+          transform: translateY(50%) translateX(-50%);
+  line-height: 1;
+  background: #fff;
+  padding: 10px;
+  transition: 0.3s ease-in-out; }
+  .mdp-modal.shown {
+    -webkit-transform: translateY(-50%) translateX(-50%);
+        -ms-transform: translateY(-50%) translateX(-50%);
+            transform: translateY(-50%) translateX(-50%); }
+  .mdp-modal .mdp-container {
+    margin: 0 -4px;
+    box-sizing: border-box;
+    white-space: nowrap; }
+    .mdp-modal .mdp-container .mdp-date-segment-col {
+      padding: 0 4px;
+      box-sizing: border-box;
+      display: inline-block; }
+    .mdp-modal .mdp-container .mdp-date-segment {
+      box-sizing: border-box;
+      width: 120px;
+      vertical-align: top;
+      padding: 5px 15px;
+      text-align: left;
+      color: #000;
+      white-space: normal; }
+      .mdp-modal .mdp-container .mdp-date-segment:hover {
+        background: #42a5f5;
+        color: #fff; }
+        .mdp-modal .mdp-container .mdp-date-segment:hover input {
+          color: #fff; }
+          .mdp-modal .mdp-container .mdp-date-segment:hover input:disabled {
+            color: #fff; }
+        .mdp-modal .mdp-container .mdp-date-segment:hover button {
+          visibility: visible; }
+      .mdp-modal .mdp-container .mdp-date-segment .metric {
+        font-size: 35px;
+        font-weight: 600;
+        background: transparent;
+        padding: 0 0 10px 0;
+        width: 100%;
+        border: 0;
+        line-height: 1; }
+        .mdp-modal .mdp-container .mdp-date-segment .metric:disabled {
+          color: #000000; }
+      .mdp-modal .mdp-container .mdp-date-segment .comment {
+        text-transform: uppercase;
+        font-size: 14px;
+        height: 14px; }
+      .mdp-modal .mdp-container .mdp-date-segment button {
+        background: transparent;
+        box-shadow: none;
+        border-radius: 0;
+        border: 0;
+        width: 100%;
+        visibility: hidden;
+        cursor: pointer;
+        height: 25px;
+        line-height: 25px; }
+        .mdp-modal .mdp-container .mdp-date-segment button.up:before {
+          font-family: FontAwesome;
+          content: "\f0d8";
+          color: #fff;
+          display: block; }
+        .mdp-modal .mdp-container .mdp-date-segment button.down:before {
+          font-family: FontAwesome;
+          content: "\f0d7";
+          color: #fff;
+          display: block; }
+        .mdp-modal .mdp-container .mdp-date-segment button.up:hover:before {
+          color: #000000; }
+        .mdp-modal .mdp-container .mdp-date-segment button.down:hover:before {
+          color: #000000; }
+  .mdp-modal .mdp-actions {
+    text-align: center;
+    margin-left: -10px;
+    margin-right: -10px;
+    margin-top: 10px; }
+    .mdp-modal .mdp-actions .mdp-btn-wrapper {
+      box-sizing: border-box;
+      display: table-cell;
+      padding-left: 10px;
+      padding-right: 10px;
+      float: left;
+      position: relative;
+      /* one item */
+      /* two items */ }
+      .mdp-modal .mdp-actions .mdp-btn-wrapper:nth-child(1):nth-last-child(1) {
+        width: 100%; }
+      .mdp-modal .mdp-actions .mdp-btn-wrapper:nth-child(1):nth-last-child(2), .mdp-modal .mdp-actions .mdp-btn-wrapper:nth-child(2):nth-last-child(1) {
+        width: 50%; }
+    .mdp-modal .mdp-actions button {
+      border: 0;
+      box-shadow: none;
+      background: #42a5f5;
+      color: #FFF;
+      border-radius: 0;
+      height: 40px;
+      display: block;
+      width: 100%;
+      font-size: 16px;
+      cursor: pointer; }
+
+.mdp-backdrop {
+  background: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 998; }
+
+@media (max-width: 404px) {
+  .mdp-modal {
+    width: 100%; }
+    .mdp-modal .mdp-container {
+      width: auto; }
+      .mdp-modal .mdp-container .mdp-date-segment-col:nth-child(1):nth-last-child(1) {
+        width: 100%; }
+      .mdp-modal .mdp-container .mdp-date-segment-col:nth-child(1):nth-last-child(2) {
+        width: 50%; }
+      .mdp-modal .mdp-container .mdp-date-segment-col:nth-child(2):nth-last-child(1) {
+        width: 50%; }
+      .mdp-modal .mdp-container .mdp-date-segment-col:nth-child(1):nth-last-child(3) {
+        width: 33.33333%; }
+      .mdp-modal .mdp-container .mdp-date-segment-col:nth-child(2):nth-last-child(2) {
+        width: 33.33333%; }
+      .mdp-modal .mdp-container .mdp-date-segment-col:nth-child(3):nth-last-child(1) {
+        width: 33.33333%; }
+      .mdp-modal .mdp-container .mdp-date-segment-col:nth-child(1):nth-last-child(4) {
+        width: 25%; }
+      .mdp-modal .mdp-container .mdp-date-segment-col:nth-child(2):nth-last-child(3) {
+        width: 25%; }
+      .mdp-modal .mdp-container .mdp-date-segment-col:nth-child(3):nth-last-child(2) {
+        width: 25%; }
+      .mdp-modal .mdp-container .mdp-date-segment-col:nth-child(4):nth-last-child(1) {
+        width: 25%; } }
+
+@media (min-width: 301px) and (max-width: 404px) {
+  .mdp-modal .mdp-container .mdp-date-segment .metric {
+    font-size: 26px; }
+  .mdp-modal .mdp-container .mdp-date-segment .comment {
+    font-size: 12px; } }
+
+@media (max-width: 300px) {
+  .mdp-modal .mdp-container .mdp-date-segment .metric {
+    font-size: 20px; }
+  .mdp-modal .mdp-container .mdp-date-segment .comment {
+    font-size: 12px; } }
