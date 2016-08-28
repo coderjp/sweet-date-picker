@@ -22,6 +22,7 @@ $modal-width: $container-width + ($gutter * 2);
   transition: 0.3s ease-in-out;
   box-shadow: 0 0 23px 15px rgba(0, 0, 0, 0.24);
   border-radius: 6px;
+  user-select: none;
 
   &.shown {
     transform: translateY(-50%) translateX(-50%);
@@ -84,6 +85,7 @@ $modal-width: $container-width + ($gutter * 2);
           border: 0;
           line-height: 1;
           padding: 5px 15px;
+          -webkit-text-fill-color:#000;
           &:disabled {
             color: #000000;
           }
