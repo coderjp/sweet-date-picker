@@ -47,7 +47,9 @@
         background: #42a5f5;
         color: #fff; }
         .mdp-modal .mdp-container .mdp-date-segment:hover input {
-          color: #fff; }
+          color: #fff;
+          -webkit-text-fill-color: white;
+          -webkit-opacity: 1; }
           .mdp-modal .mdp-container .mdp-date-segment:hover input:disabled {
             color: #fff; }
         .mdp-modal .mdp-container .mdp-date-segment:hover button {

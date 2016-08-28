@@ -65,6 +65,11 @@ $modal-width: $container-width + ($gutter * 2);
 
           input {
             color: #fff;
+
+            //ios fix
+            -webkit-text-fill-color: rgba(255, 255, 255, 1);
+            -webkit-opacity: 1;
+
             &:disabled {
               color: #fff;
             }
