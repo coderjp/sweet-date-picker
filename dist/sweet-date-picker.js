@@ -283,11 +283,25 @@
                 mouseDown,
                 addEvent,
                 mouseDownTimer,
-                mouseDownInterval;
+                mouseDownInterval,
+                Timeout;
 
             for (var child = 0; child < children.length; child++) {
                 segment.appendChild(createElement(children[child]));
             }
+
+            Timeout = function (fn, interval) {
+                var id = setTimeout(function () {
+                    this.executed = true;
+                    fn();
+                }.bind(this), interval );
+                this.cleared = false;
+                this.executed = false;
+                this.clear = function () {
+                    this.cleared = true;
+                    clearTimeout(id);
+                };
+            };
 
             up = function () {
                 part.value = part.value.numeric + part.step;
@@ -297,13 +311,16 @@
                 part.value = part.value.numeric - part.step;
             };
 
-            mouseUp  = function () {
-                clearTimeout(mouseDownTimer);
+            mouseUp  = function (cb) {
+                if (!mouseDownTimer.executed) {
+                    mouseDownTimer.clear();
+                    cb(); // Simulate click as we steal the event
+                }
                 clearInterval(mouseDownInterval);
             };
 
             mouseDown = function (cb) {
-                mouseDownTimer = setTimeout(function () {
+                mouseDownTimer = new Timeout(function () {
                     mouseDownInterval = setInterval(function () {
                         cb();
                     }, settings.holdInterval);
@@ -312,44 +329,50 @@
             
             addEvent = function (el, events, cb) {
                 for (var i = 0; i < events.length; i++) {
-                    el[events[i]] = function () {
-                        cb();
+                    el[events[i]] = function (e) {
+                        cb(e);
                     }
                 }
             };
 
             // Up Arrow Events
 
-            partElement.querySelector('.up').onclick = function () {
-                up();
-            };
+            addEvent(partElement.querySelector('.up'), ['ontouchstart', 'onmousedown'], function (e) {
 
-            addEvent(partElement.querySelector('.up'), ['ontouchstart', 'onmousedown'], function () {
+                // Only allow 1 of these events to fire
+                e.preventDefault();
+
                 mouseDown(function () {
                     up();
                 });
+
             });
 
             addEvent(partElement.querySelector('.up'), ['ontouchend', 'onmouseup'], function () {
-                mouseUp();
+                mouseUp(function () {
+                    up();
+                });
             });
 
 
 
             // Down Arrow Events
 
-            partElement.querySelector('.down').onclick = function () {
-                down();
-            };
+            addEvent(partElement.querySelector('.down'), ['ontouchstart', 'onmousedown'], function (e) {
 
-            addEvent(partElement.querySelector('.down'), ['ontouchstart', 'onmousedown'], function () {
+                // Only allow 1 of these events to fire
+                e.preventDefault();
+
                 mouseDown(function () {
                     down();
                 });
+
             });
 
             addEvent(partElement.querySelector('.down'), ['ontouchend', 'onmouseup'], function () {
-                mouseUp();
+                mouseUp(function () {
+                    down();
+                });
             });
 
 
