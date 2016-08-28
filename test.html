@@ -12,6 +12,10 @@
         <script>
             var myDate = sdp(document.querySelector('#date'));
 
+            myDate.on('set', function(e) {
+                console.log(e);
+            });
+
             sdp(document.querySelector('#time'), {
                 format: 'HH mm',
                 displayFormat: 'HH:mm',

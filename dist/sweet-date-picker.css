@@ -1,7 +1,7 @@
 .mdp-modal {
   box-sizing: border-box;
   position: fixed;
-  z-index: 999;
+  z-index: 10000;
   font-family: 'Open Sans', sans-serif;
   left: 50%;
   top: 50%;
@@ -116,7 +116,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 998; }
+  z-index: 9999; }
 
 @media (max-width: 404px) {
   .mdp-modal {

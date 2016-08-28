@@ -73,6 +73,8 @@
 
         this.updateUI();
 
+        return this;
+
     }
 
     SweetDatePicker.prototype.parsePart = function (format) {
@@ -121,6 +123,7 @@
 
         document.querySelector('body').appendChild(this.modal);
         document.querySelector('body').appendChild(_sweetDatePickerBackdrop);
+        this.fireEvent('opened');
 
     };
 
@@ -129,7 +132,7 @@
         // Don't try to remove it if it isn't visible
         if (! this.modal.parentNode) return false;
         this.modal.parentNode.removeChild(this.modal);
-
+        this.fireEvent('closed');
     };
 
     SweetDatePicker.prototype.nodes = function () {
@@ -324,8 +327,10 @@ SweetDatePicker.prototype.days = function () {
 };
 
 SweetDatePicker.prototype.set = function () {
+    var date = this._date.format(this.settings.submitFormat);
+    this.fireEvent('set', {newValue: date});
     this.input.value = this._date.format(this.settings.displayFormat);
-    this.submitInput.value = this._date.format(this.settings.submitFormat);
+    this.submitInput.value = date;
     SweetDatePicker.close();
 };
 
@@ -348,26 +353,36 @@ SweetDatePicker.prototype._merge = function (obj, defaults) {
     return obj;
 };
 
-SweetDatePicker.prototype.defineSetterGetter = function (part) {
+SweetDatePicker.prototype.fireEvent = function (eventName, data) {
+    var ev;
 
-    var obj = {};
+    data = data || {};
 
-    obj[part.unit] = {
-        get: function () {
-            var numeric = this._date[part.method]() + part.modifier;
-            return {
-                display: this._date.format(part.format),
-                numeric: parseInt(numeric)
-            }
-        },
-        set: function (value) {
-            value = value - part.modifier;
-            this.date = moment(this._date[part.method](value));
+    if (document.createEvent) {
+        ev = document.createEvent('HTMLEvents');
+        ev.initEvent(eventName, true, false);
+        ev.firedBy = this;
+        for (dataKey in data) {
+            ev[dataKey] = data[dataKey];
         }
-    };
-
-    Object.defineProperties(this, obj);
+        this.input.dispatchEvent(ev);
+    } else if (document.createEventObject) {
+        ev = document.createEventObject();
+        for (dataKey in data) {
+            ev[dataKey] = data[dataKey];
+        }
+        this.input.fireEvent('on' + eventName, ev);
+    }
 };
+
+SweetDatePicker.prototype.on = function(eventName, callback)
+{
+    if (!!window.addEventListener) {
+        this.input.addEventListener(eventName, callback, false);
+    } else {
+        this.input.attachEvent('on' + eventName, callback);
+    }
+},
 
 SweetDatePicker.close =  function () {
 
