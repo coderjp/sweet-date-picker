@@ -351,7 +351,7 @@ SweetDatePicker.prototype.set = function () {
 
 SweetDatePicker.prototype.updateInputs = function () {
     this.input.value = this._date.format(this.settings.displayFormat);
-    this.submitInput.value = date;
+    this.submitInput.value = this._date.format(this.settings.submitFormat);
 };
 
 SweetDatePicker.prototype.clear = function () {
