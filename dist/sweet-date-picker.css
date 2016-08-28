@@ -61,7 +61,8 @@
         border: 0;
         line-height: 1;
         padding: 5px 15px;
-        -webkit-text-fill-color: #000; }
+        -webkit-text-fill-color: black;
+        -webkit-opacity: 1; }
         .mdp-modal .mdp-container .mdp-date-segment .metric:disabled {
           color: #000000; }
       .mdp-modal .mdp-container .mdp-date-segment .comment {

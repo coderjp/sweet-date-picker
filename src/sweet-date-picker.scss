@@ -85,7 +85,8 @@ $modal-width: $container-width + ($gutter * 2);
           border: 0;
           line-height: 1;
           padding: 5px 15px;
-          -webkit-text-fill-color:#000;
+          -webkit-text-fill-color: rgba(0, 0, 0, 1);
+          -webkit-opacity: 1;
           &:disabled {
             color: #000000;
           }
