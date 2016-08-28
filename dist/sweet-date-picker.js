@@ -34,6 +34,7 @@
                 set: function (value) {
                     self._date = value;
                     self.updateUI();
+                    self.updateInputs();
                 }
             }
         });
@@ -125,7 +126,8 @@
             },
             set: function (value) {
                 value = value - part.modifier;
-                self.date = moment(self._date[part.method](value));
+                self._date = moment(self._date[part.method](value));
+                self.updateUI();
             }
         });
 
@@ -343,9 +345,13 @@ SweetDatePicker.prototype.days = function () {
 SweetDatePicker.prototype.set = function () {
     var date = this._date.format(this.settings.submitFormat);
     this.fireEvent('set', {newValue: date});
+    this.updateInputs();
+    SweetDatePicker.close();
+};
+
+SweetDatePicker.prototype.updateInputs = function () {
     this.input.value = this._date.format(this.settings.displayFormat);
     this.submitInput.value = date;
-    SweetDatePicker.close();
 };
 
 SweetDatePicker.prototype.clear = function () {
