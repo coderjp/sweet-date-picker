@@ -11,7 +11,9 @@
   line-height: 1;
   background: #fff;
   padding: 10px;
-  transition: 0.3s ease-in-out; }
+  transition: 0.3s ease-in-out;
+  box-shadow: 0 0 23px 15px rgba(0, 0, 0, 0.24);
+  border-radius: 6px; }
   .mdp-modal.shown {
     -webkit-transform: translateY(-50%) translateX(-50%);
         -ms-transform: translateY(-50%) translateX(-50%);
@@ -28,7 +30,6 @@
       box-sizing: border-box;
       width: 120px;
       vertical-align: top;
-      padding: 5px 15px;
       text-align: left;
       color: #000;
       white-space: normal; }
@@ -48,13 +49,15 @@
         padding: 0 0 10px 0;
         width: 100%;
         border: 0;
-        line-height: 1; }
+        line-height: 1;
+        padding: 5px 15px; }
         .mdp-modal .mdp-container .mdp-date-segment .metric:disabled {
           color: #000000; }
       .mdp-modal .mdp-container .mdp-date-segment .comment {
         text-transform: uppercase;
         font-size: 14px;
-        height: 14px; }
+        height: 14px;
+        padding: 5px 15px; }
       .mdp-modal .mdp-container .mdp-date-segment button {
         background: transparent;
         box-shadow: none;
@@ -142,13 +145,21 @@
       .mdp-modal .mdp-container .mdp-date-segment-col:nth-child(3):nth-last-child(2) {
         width: 25%; }
       .mdp-modal .mdp-container .mdp-date-segment-col:nth-child(4):nth-last-child(1) {
-        width: 25%; } }
+        width: 25%; }
+      .mdp-modal .mdp-container .mdp-date-segment-col button {
+        height: 45px;
+        line-height: 45px; }
+    .mdp-modal .mdp-actions button {
+      height: 50px;
+      line-height: 50px; } }
 
 @media (min-width: 301px) and (max-width: 404px) {
-  .mdp-modal .mdp-container .mdp-date-segment .metric {
-    font-size: 26px; }
-  .mdp-modal .mdp-container .mdp-date-segment .comment {
-    font-size: 12px; } }
+  .mdp-modal {
+    border-radius: 0; }
+    .mdp-modal .mdp-container .mdp-date-segment .metric {
+      font-size: 26px; }
+    .mdp-modal .mdp-container .mdp-date-segment .comment {
+      font-size: 12px; } }
 
 @media (max-width: 300px) {
   .mdp-modal .mdp-container .mdp-date-segment .metric {

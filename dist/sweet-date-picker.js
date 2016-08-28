@@ -14,6 +14,10 @@
 
         this.settings = settings = this._merge(config || {}, SweetDatePicker.defaults);
 
+        if (settings.allowInput && (('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0))) {
+            settings.allowInput = false;
+        }
+
         this.modal = null;
 
         this.parts = [];
@@ -33,8 +37,7 @@
                 },
                 set: function (value) {
                     self._date = value;
-                    self.updateUI();
-                    self.updateInputs();
+                    self.set();
                 }
             }
         });
@@ -69,6 +72,7 @@
 
         this.input.onclick = function () {
             self.showModal();
+            this.blur();
         };
 
         this.input.value = this.date.format(this.settings.displayFormat);
@@ -137,17 +141,29 @@
 
     SweetDatePicker.prototype.showModal = function () {
 
-        document.querySelector('body').appendChild(this.modal);
+        var modal = this.modal;
+
+        document.querySelector('body').appendChild(modal);
         document.querySelector('body').appendChild(_sweetDatePickerBackdrop);
         this.fireEvent('opened');
+
+        setTimeout(function () {
+            modal.classList.add('shown');
+        }, 10);
 
     };
 
     SweetDatePicker.prototype.hideModal = function () {
 
+        var modal = this.modal;
+
         // Don't try to remove it if it isn't visible
-        if (! this.modal.parentNode) return false;
-        this.modal.parentNode.removeChild(this.modal);
+        if (! modal.parentNode) return false;
+        modal.classList.remove('shown');
+        setTimeout(function () {
+            modal.parentNode.removeChild(modal);
+        }, 200)
+
         this.fireEvent('closed');
     };
 
@@ -175,7 +191,7 @@
 
         createModal = function () {
 
-            return createElement('div.mdp-modal.shown');
+            return createElement('div.mdp-modal');
 
         },
 
@@ -294,7 +310,10 @@
             }
 
             actionContainer.appendChild(setBtnWrapper);
-            setBtn.onclick = function () { self.set(); };
+            setBtn.onclick = function () {
+                self.set();
+                SweetDatePicker.close();
+            };
 
             return actionContainer;
 
@@ -345,8 +364,8 @@ SweetDatePicker.prototype.days = function () {
 SweetDatePicker.prototype.set = function () {
     var date = this._date.format(this.settings.submitFormat);
     this.fireEvent('set', {newValue: date});
+    this.updateUI();
     this.updateInputs();
-    SweetDatePicker.close();
 };
 
 SweetDatePicker.prototype.updateInputs = function () {
@@ -411,7 +430,9 @@ SweetDatePicker.close =  function () {
         _sweetDatePickers[i].hideModal();
     }
 
-    _sweetDatePickerBackdrop.parentNode.removeChild(_sweetDatePickerBackdrop)
+    setTimeout(function () {
+        _sweetDatePickerBackdrop.parentNode.removeChild(_sweetDatePickerBackdrop)
+    }, 200)
 };
 
 SweetDatePicker.defaults =  {

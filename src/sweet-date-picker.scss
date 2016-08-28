@@ -20,6 +20,8 @@ $modal-width: $container-width + ($gutter * 2);
   background: #fff;
   padding: $gutter;
   transition: 0.3s ease-in-out;
+  box-shadow: 0 0 23px 15px rgba(0, 0, 0, 0.24);
+  border-radius: 6px;
 
   &.shown {
     transform: translateY(-50%) translateX(-50%);
@@ -41,7 +43,6 @@ $modal-width: $container-width + ($gutter * 2);
         width: $part-width;
 
         vertical-align: top;
-        padding: 5px 15px;
         text-align: left;
         color: #000;
         white-space: normal;
@@ -71,6 +72,7 @@ $modal-width: $container-width + ($gutter * 2);
           width: 100%;
           border: 0;
           line-height: 1;
+          padding: 5px 15px;
           &:disabled {
             color: #000000;
           }
@@ -80,6 +82,7 @@ $modal-width: $container-width + ($gutter * 2);
           text-transform: uppercase;
           font-size:  14px;
           height: 14px;
+          padding: 5px 15px;
         }
 
         button {
@@ -184,18 +187,35 @@ $modal-width: $container-width + ($gutter * 2);
         @for $i from 1 through 4 {
           @include sibling-width($i);
         }
+
+        button {
+          height: 45px;
+          line-height: 45px;
+        }
+      }
+    }
+
+    .mdp-actions {
+      button {
+        height: 50px;
+        line-height: 50px;
       }
     }
   }
 }
 
 @media (min-width: 301px) and (max-width: $modal-width) {
-  .mdp-modal .mdp-container .mdp-date-segment {
-    .metric {
-      font-size: 26px;
-    }
-    .comment {
-      font-size: 12px;
+  .mdp-modal {
+
+    border-radius: 0;
+
+    .mdp-container .mdp-date-segment {
+      .metric {
+        font-size: 26px;
+      }
+      .comment {
+        font-size: 12px;
+      }
     }
   }
 }
