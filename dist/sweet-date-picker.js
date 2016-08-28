@@ -14,7 +14,7 @@
 
         this.settings = settings = this._merge(config || {}, SweetDatePicker.defaults);
 
-        if (settings.allowInput && (('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0))) {
+        if (settings.allowInput && SweetDatePicker.isTouch()) {
             settings.allowInput = false;
         }
 
@@ -191,7 +191,13 @@
 
         createModal = function () {
 
-            return createElement('div.mdp-modal');
+            var makeString = 'div.mdp-modal';
+
+            if (SweetDatePicker.isTouch()) {
+                makeString += '.touch';
+            }
+
+            return createElement(makeString);
 
         },
 
@@ -268,19 +274,86 @@
                     'input.metric',
                     'div.comment',
                     'button.down'
-                ];
+                ],
+                up,
+                down,
+                mouseUp,
+                mouseDown,
+                addEvent,
+                mouseDownTimer,
+                mouseDownInterval;
 
             for (var child = 0; child < children.length; child++) {
                 segment.appendChild(createElement(children[child]));
             }
 
-            partElement.querySelector('.up').onclick = function () {
+            up = function () {
                 part.value = part.value.numeric + part.step;
             };
 
-            partElement.querySelector('.down').onclick = function () {
+            down = function () {
                 part.value = part.value.numeric - part.step;
             };
+
+            mouseUp  = function () {
+                clearTimeout(mouseDownTimer);
+                clearInterval(mouseDownInterval);
+            };
+
+            mouseDown = function (cb) {
+                mouseDownTimer = setTimeout(function () {
+                    mouseDownInterval = setInterval(function () {
+                        cb();
+                    }, settings.holdInterval);
+                }, settings.debounceWait);
+            };
+            
+            addEvent = function (el, events, cb) {
+                for (var i = 0; i < events.length; i++) {
+                    el[events[i]] = function () {
+                        cb();
+                    }
+                }
+            };
+
+            // Up Arrow Events
+
+            partElement.querySelector('.up').onclick = function () {
+                up();
+            };
+
+            addEvent(partElement.querySelector('.up'), ['ontouchstart', 'onmousedown'], function () {
+                mouseDown(function () {
+                    up();
+                });
+            });
+
+            addEvent(partElement.querySelector('.up'), ['ontouchend', 'onmouseup'], function () {
+                mouseUp();
+            });
+
+
+
+            // Down Arrow Events
+
+            partElement.querySelector('.down').onclick = function () {
+                down();
+            };
+
+            addEvent(partElement.querySelector('.down'), ['ontouchstart', 'onmousedown'], function () {
+                mouseDown(function () {
+                    down();
+                });
+            });
+
+            addEvent(partElement.querySelector('.down'), ['ontouchend', 'onmouseup'], function () {
+                mouseUp();
+            });
+
+
+            // Disable the inputs if the user is on a touch device , otherwise
+            // it will cause the keyboard to pop up should they slightly miss the arrow.
+            
 
             if (settings.allowInput && part.numeric) {
                 bindPartInputEvents(partElement.querySelector('input'), part);
@@ -442,7 +515,9 @@ SweetDatePicker.defaults =  {
     allowInput: true,
     tabFill: true,
     showClear: true,
-    steps: {}
+    steps: {},
+    debounceWait: 400,
+    holdInterval: 50
 };
 
 SweetDatePicker.lookup = function (format) {
@@ -471,6 +546,14 @@ SweetDatePicker.lookup = function (format) {
 };
 
 SweetDatePicker.events = ['set', 'closed', 'opened', 'clear'];
+
+SweetDatePicker.isTouch = function () {
+    if (('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch) {
+        return true;
+    } else {
+        return false;
+    }
+};
 
 // Helpers
 function sdp (input, config) {

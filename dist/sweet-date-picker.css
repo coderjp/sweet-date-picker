@@ -18,6 +18,12 @@
     -webkit-transform: translateY(-50%) translateX(-50%);
         -ms-transform: translateY(-50%) translateX(-50%);
             transform: translateY(-50%) translateX(-50%); }
+  .mdp-modal.touch .mdp-container .mdp-date-segment button {
+    visibility: visible;
+    height: 45px;
+    line-height: 45px; }
+    .mdp-modal.touch .mdp-container .mdp-date-segment button:before {
+      color: #4d4d4d; }
   .mdp-modal .mdp-container {
     margin: 0 -4px;
     box-sizing: border-box;
@@ -66,22 +72,20 @@
         width: 100%;
         visibility: hidden;
         cursor: pointer;
-        height: 25px;
-        line-height: 25px; }
+        height: 30px;
+        line-height: 30px; }
+        .mdp-modal .mdp-container .mdp-date-segment button:before {
+          color: #fff; }
         .mdp-modal .mdp-container .mdp-date-segment button.up:before {
           font-family: FontAwesome;
           content: "\f0d8";
-          color: #fff;
           display: block; }
         .mdp-modal .mdp-container .mdp-date-segment button.down:before {
           font-family: FontAwesome;
           content: "\f0d7";
-          color: #fff;
           display: block; }
-        .mdp-modal .mdp-container .mdp-date-segment button.up:hover:before {
-          color: #000000; }
-        .mdp-modal .mdp-container .mdp-date-segment button.down:hover:before {
-          color: #000000; }
+        .mdp-modal .mdp-container .mdp-date-segment button:hover:before {
+          color: #fff; }
   .mdp-modal .mdp-actions {
     text-align: center;
     margin-left: -10px;

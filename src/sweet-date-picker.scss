@@ -27,6 +27,17 @@ $modal-width: $container-width + ($gutter * 2);
     transform: translateY(-50%) translateX(-50%);
   }
 
+  &.touch {
+    .mdp-container .mdp-date-segment button {
+      visibility: visible;
+      height: 45px;
+      line-height: 45px;
+      &:before {
+        color: lighten(#000, 30%);
+      }
+    }
+  }
+
    .mdp-container {
       margin: 0 -4px;
      box-sizing: border-box;
@@ -93,31 +104,28 @@ $modal-width: $container-width + ($gutter * 2);
           width: 100%;
           visibility: hidden;
           cursor: pointer;
-          height: 25px;
-          line-height: 25px;
+          height: 30px;
+          line-height: 30px;
+
+          &:before {
+            color: #fff;
+          }
 
            &.up:before {
              font-family: FontAwesome;
              content: "\f0d8";
-             color: #fff;
              display: block;
            }
 
           &.down:before {
              font-family: FontAwesome;
              content: "\f0d7";
-             color: #fff;
-            display: block;
+             display: block;
            }
 
-          &.up:hover:before {
-            color: #000000;
+          &:hover:before {
+            color: #fff;
           }
-
-          &.down:hover:before {
-            color: #000000;
-          }
-
 
         }
 
