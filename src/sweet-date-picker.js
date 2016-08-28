@@ -7,9 +7,12 @@
 
         var self = this,
             formatParts,
-            part;
+            part,
+            evt,
+            evtSettingName,
+            settings;
 
-        this.settings = this._merge(config || {}, SweetDatePicker.defaults);
+        this.settings = settings = this._merge(config || {}, SweetDatePicker.defaults);
 
         this.modal = null;
 
@@ -72,6 +75,17 @@
         _sweetDatePickers.push(this);
 
         this.updateUI();
+
+        // Bind Events
+        for (var i = 0; i < SweetDatePicker.events.length; i++) {
+            evt = SweetDatePicker.events[i];
+            evtSettingName = 'on' + evt.charAt(0).toUpperCase() + evt.slice(1);
+            if (this.settings[evtSettingName]) {
+                this.on(evt, function (e) {
+                    settings[evtSettingName](e);
+                }.bind(this));
+            }
+        }
 
         return this;
 
@@ -338,6 +352,7 @@ SweetDatePicker.prototype.clear = function () {
 
     this.input.value = '';
     this.submitInput .value = '';
+    this.fireEvent('clear');
     SweetDatePicker.close();
 
 };
@@ -427,6 +442,8 @@ SweetDatePicker.lookup = function (format) {
 
     return lookupTable[format] || null;
 };
+
+SweetDatePicker.events = ['set', 'closed', 'opened', 'clear'];
 
 // Helpers
 function sdp (input, config) {

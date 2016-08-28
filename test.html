@@ -16,11 +16,18 @@
                 console.log(e);
             });
 
+            myDate.on('clear', function(e) {
+                console.log(e);
+            });
+
             sdp(document.querySelector('#time'), {
                 format: 'HH mm',
                 displayFormat: 'HH:mm',
                 steps: {
                     mm: 15
+                },
+                onClear: function (e) {
+                    console.log(e);
                 }
             });
         </script>
