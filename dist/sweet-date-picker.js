@@ -145,6 +145,7 @@
 
         document.querySelector('body').appendChild(modal);
         document.querySelector('body').appendChild(_sweetDatePickerBackdrop);
+        document.querySelector('html').classList.add('mdp-freeze');
         this.fireEvent('opened');
 
         setTimeout(function () {
@@ -162,6 +163,7 @@
         modal.classList.remove('shown');
         setTimeout(function () {
             modal.parentNode.removeChild(modal);
+            document.querySelector('html').classList.remove('mdp-freeze');
         }, 200)
 
         this.fireEvent('closed');
