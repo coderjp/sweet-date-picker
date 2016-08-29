@@ -192,6 +192,7 @@
         if (! modal.parentNode) return false;
         modal.classList.remove('shown');
         setTimeout(function () {
+            if (! modal.parentNode) return false;
             modal.parentNode.removeChild(modal);
             document.querySelector('html').classList.remove('mdp-freeze');
 
@@ -570,7 +571,10 @@ SweetDatePicker.close =  function () {
     }
 
     setTimeout(function () {
-        _sweetDatePickerBackdrop.parentNode.removeChild(_sweetDatePickerBackdrop)
+        // Just in case it has already been hidden by this point
+        if (_sweetDatePickerBackdrop.parentNode) {
+            _sweetDatePickerBackdrop.parentNode.removeChild(_sweetDatePickerBackdrop);
+        }
     }, 200)
 };
 
