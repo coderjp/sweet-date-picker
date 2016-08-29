@@ -10,7 +10,8 @@
             part,
             evt,
             evtSettingName,
-            settings;
+            settings,
+            initialisedWithDate = true;
 
         this.settings = settings = this._merge(config || {}, SweetDatePicker.defaults);
 
@@ -42,8 +43,16 @@
             }
         });
 
-        this._date = input.getAttribute('data-value') ?
-            moment(input.getAttribute('data-value'), this.settings.submitFormat) : moment();
+        if (input.getAttribute('data-value')) {
+            this._date = moment(input.getAttribute('data-value'), this.settings.submitFormat);
+        } else if (input.value.length > 0) {
+            this._date = moment(input.value, this.settings.submitFormat);
+        }
+
+        if (! this._date || ! this._date.isValid()) {
+            initialisedWithDate = false;
+            this._date = moment();
+        }
 
         formatParts = this.settings.format.split(' ');
 
@@ -75,11 +84,13 @@
             this.blur();
         };
 
-        this.input.value = this.date.format(this.settings.displayFormat);
-
         _sweetDatePickers.push(this);
 
         this.updateUI();
+
+        if (initialisedWithDate) {
+            this.updateInputs();
+        }
 
         // Bind Events
         for (var i = 0; i < SweetDatePicker.events.length; i++) {
