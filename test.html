@@ -10,7 +10,9 @@
         <script src="bower_components/moment/moment.js"></script>
         <script src="dist/sweet-date-picker.js"></script>
         <script>
-            var myDate = sdp(document.querySelector('#date'));
+            var myDate = sdp(document.querySelector('#date'), {
+                maxDate: moment('2016-12-25', 'YYYY-MM-DD')
+            });
 
             myDate.on('set', function(e) {
                 console.log(e);

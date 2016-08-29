@@ -129,8 +129,16 @@
                 }
             },
             set: function (value) {
+                var newDate;
+
                 value = value - part.modifier;
-                self._date = moment(self._date[part.method](value));
+                newDate = moment(self._date)[part.method](value);
+
+                if (self.settings.maxDate && self.settings.maxDate < newDate) {
+                    return;
+                }
+
+                self._date = newDate;
                 self.updateUI();
             }
         });
@@ -261,9 +269,15 @@
 
                 val = this.value + charStr;
 
-                if (val.length < part.length) return true; // Not enough information to validate it
+                // Only allow numeric values
+                if (isNaN(parseFloat(val)) && !isFinite(val)) {
+                    if (evt.preventDefault) evt.preventDefault();
+                    return false;
+                }
 
-                val = parseInt(val);
+                if (val.length < part.inputLength) return true; // Not enough information to validate it
+
+                val = parseInt(val) - part.modifier;
 
                 testDate = moment(_date)[ part.method ](val);
 

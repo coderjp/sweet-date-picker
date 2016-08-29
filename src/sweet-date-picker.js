@@ -269,9 +269,15 @@
 
                 val = this.value + charStr;
 
-                if (val.length < part.length) return true; // Not enough information to validate it
+                // Only allow numeric values
+                if (isNaN(parseFloat(val)) && !isFinite(val)) {
+                    if (evt.preventDefault) evt.preventDefault();
+                    return false;
+                }
 
-                val = parseInt(val);
+                if (val.length < part.inputLength) return true; // Not enough information to validate it
+
+                val = parseInt(val) - part.modifier;
 
                 testDate = moment(_date)[ part.method ](val);
 
