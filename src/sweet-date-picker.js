@@ -129,8 +129,16 @@
                 }
             },
             set: function (value) {
+                var newDate;
+
                 value = value - part.modifier;
-                self._date = moment(self._date[part.method](value));
+                newDate = moment(self._date)[part.method](value);
+
+                if (self.settings.maxDate && self.settings.maxDate < newDate) {
+                    return;
+                }
+
+                self._date = newDate;
                 self.updateUI();
             }
         });
