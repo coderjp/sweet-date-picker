@@ -54,6 +54,11 @@
             this._date = moment();
         }
 
+        // Enforce the max date on init
+        if (this.settings.maxDate && this.settings.maxDate < this._date) {
+            this._date = this.settings.maxDate;
+        }
+
         formatParts = this.settings.format.split(' ');
 
         for (var i = 0; i < formatParts.length; i++) {
