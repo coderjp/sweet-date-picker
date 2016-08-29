@@ -146,6 +146,12 @@
         document.querySelector('body').appendChild(modal);
         document.querySelector('body').appendChild(_sweetDatePickerBackdrop);
         document.querySelector('html').classList.add('mdp-freeze');
+
+        // IOS still scrolls with the css class. This forces it to obey.
+        document.ontouchmove = function(e){
+            e.preventDefault();
+        };
+
         this.fireEvent('opened');
 
         setTimeout(function () {
@@ -164,6 +170,11 @@
         setTimeout(function () {
             modal.parentNode.removeChild(modal);
             document.querySelector('html').classList.remove('mdp-freeze');
+
+            // Allow scroll on IOS again
+            document.ontouchmove = function(e){
+                return true;
+            };
         }, 200)
 
         this.fireEvent('closed');

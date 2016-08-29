@@ -8,11 +8,8 @@ $parts: 3;
 $container-width: ($part-width * 3) + ($part-gutter * ($parts * 2));
 $modal-width: $container-width + ($gutter * 2);
 
-html.mdp-freeze {
+html.mdp-freeze body {
   overflow: hidden;
-  body {
-    overflow: hidden;
-  }
 }
 
 .mdp-modal {

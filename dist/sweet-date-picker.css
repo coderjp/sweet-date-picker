@@ -1,7 +1,5 @@
-html.mdp-freeze {
+html.mdp-freeze body {
   overflow: hidden; }
-  html.mdp-freeze body {
-    overflow: hidden; }
 
 .mdp-modal {
   box-sizing: border-box;
