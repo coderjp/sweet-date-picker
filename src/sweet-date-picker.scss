@@ -43,6 +43,27 @@ html.mdp-freeze body {
     }
   }
 
+  .close {
+    position: absolute;
+    right: 0;
+    top: -60px;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+    cursor: pointer;
+    &:before {
+      content: "\00d7";
+      font-size: 50px;
+      color: rgba(255,255,255,0.5);
+      font-weight: 200;
+      transition: color 0.3s;
+    }
+    &:hover:before {
+      color: #fff;
+    }
+  }
+
    .mdp-container {
       margin: 0 -4px;
      box-sizing: border-box;

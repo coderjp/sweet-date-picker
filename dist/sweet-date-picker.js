@@ -229,13 +229,22 @@
 
         createModal = function () {
 
-            var makeString = 'div.mdp-modal';
+            var makeString = 'div.mdp-modal',
+                closeBtnString = 'button.close',
+                closeBtn,
+                modal;
 
             if (SweetDatePicker.isTouch()) {
                 makeString += '.touch';
             }
 
-            return createElement(makeString);
+            modal = createElement(makeString);
+            closeBtn = createElement(closeBtnString);
+            closeBtn.onclick = function () {
+                SweetDatePicker.close();
+            };
+            modal.appendChild(closeBtn);
+            return modal;
 
         },
 
