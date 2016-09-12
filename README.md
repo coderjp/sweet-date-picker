@@ -18,7 +18,7 @@ Sweet Date picker depends on the [Moment.js] library. Bower will install this as
 
 ## Browser Support
 
-- IE 9, 10, 11 (To Be confirmed)
+- IE 9, 10, 11
 - Chrome
 - Firefox
 - iOS (Versions to be confirmed)

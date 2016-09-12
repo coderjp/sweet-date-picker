@@ -169,7 +169,7 @@
 
         document.querySelector('body').appendChild(modal);
         document.querySelector('body').appendChild(_sweetDatePickerBackdrop);
-        document.querySelector('html').classList.add('mdp-freeze');
+        document.querySelector('html').className += ' mdp-freeze';
 
         // IOS still scrolls with the css class. This forces it to obey.
         document.ontouchmove = function(e){
@@ -179,7 +179,7 @@
         this.fireEvent('opened');
 
         setTimeout(function () {
-            modal.classList.add('shown');
+            modal.className += ' shown';
         }, 10);
 
     };
@@ -190,11 +190,11 @@
 
         // Don't try to remove it if it isn't visible
         if (! modal.parentNode) return false;
-        modal.classList.remove('shown');
+        modal.className = modal.className.replace(/\bshown\b/,'');
         setTimeout(function () {
             if (! modal.parentNode) return false;
             modal.parentNode.removeChild(modal);
-            document.querySelector('html').classList.remove('mdp-freeze');
+            document.querySelector('html').className = document.querySelector('html').className.replace(/\bmdp-freeze\b/,'');
 
             // Allow scroll on IOS again
             document.ontouchmove = function(e){
@@ -219,7 +219,7 @@
 
             if (attributes.length > 1) {
                 for (var classIndex = 1; classIndex < attributes.length; classIndex++) {
-                    element.classList.add(attributes[classIndex]);
+                    element.className += ' ' + attributes[classIndex];
                 }
             }
 
@@ -326,7 +326,8 @@
                 addEvent,
                 mouseDownTimer,
                 mouseDownInterval,
-                Timeout;
+                Timeout,
+                events;
 
             for (var child = 0; child < children.length; child++) {
                 segment.appendChild(createElement(children[child]));
@@ -378,8 +379,8 @@
             };
 
             // Up Arrow Events
-
-            addEvent(partElement.querySelector('.up'), ['ontouchstart', 'onmousedown'], function (e) {
+            events = SweetDatePicker.supportsTouch() ? ['ontouchstart', 'onmousedown'] : ['onmousedown'];
+            addEvent(partElement.querySelector('.up'), events, function (e) {
 
                 // Only allow 1 of these events to fire
                 e.preventDefault();
@@ -390,7 +391,8 @@
 
             });
 
-            addEvent(partElement.querySelector('.up'), ['ontouchend', 'onmouseup'], function () {
+            events = SweetDatePicker.supportsTouch() ? ['ontouchend', 'onmouseup'] : ['onmouseup'];
+            addEvent(partElement.querySelector('.up'), events, function () {
                 mouseUp(function () {
                     up();
                 });
@@ -399,8 +401,8 @@
 
 
             // Down Arrow Events
-
-            addEvent(partElement.querySelector('.down'), ['ontouchstart', 'onmousedown'], function (e) {
+            events = SweetDatePicker.supportsTouch() ? ['ontouchstart', 'onmousedown'] : ['onmousedown'];
+            addEvent(partElement.querySelector('.down'), events, function (e) {
 
                 // Only allow 1 of these events to fire
                 e.preventDefault();
@@ -411,7 +413,8 @@
 
             });
 
-            addEvent(partElement.querySelector('.down'), ['ontouchend', 'onmouseup'], function () {
+            events = SweetDatePicker.supportsTouch() ? ['ontouchend', 'onmouseup'] : ['onmouseup'];
+            addEvent(partElement.querySelector('.down'), events, function () {
                 mouseUp(function () {
                     down();
                 });
@@ -616,6 +619,10 @@ SweetDatePicker.lookup = function (format) {
 };
 
 SweetDatePicker.events = ['set', 'closed', 'opened', 'clear'];
+
+SweetDatePicker.supportsTouch = function () {
+    return 'ontouchstart' in window;
+};
 
 SweetDatePicker.isTouch = function () {
     if (('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch) {
