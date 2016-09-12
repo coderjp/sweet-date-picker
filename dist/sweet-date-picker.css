@@ -39,15 +39,16 @@ html.mdp-freeze body {
     background: transparent;
     box-shadow: none;
     padding: 0;
-    cursor: pointer; }
+    cursor: pointer;
+    opacity: 0.5;
+    transition: opacity 0.3s; }
     .mdp-modal .close:before {
       content: "\00d7";
       font-size: 50px;
-      color: rgba(255, 255, 255, 0.5);
-      font-weight: 200;
-      transition: color 0.3s; }
-    .mdp-modal .close:hover:before {
-      color: #fff; }
+      color: #fff;
+      font-weight: normal; }
+    .mdp-modal .close:hover {
+      opacity: 1; }
   .mdp-modal .mdp-container {
     margin: 0 -4px;
     box-sizing: border-box;
