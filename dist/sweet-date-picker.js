@@ -21,6 +21,8 @@
 
         this.modal = null;
 
+        this.submitDate = null;
+
         this.parts = [];
 
         if (! _sweetDatePickerBackdrop) {
@@ -34,7 +36,7 @@
         Object.defineProperties(this, {
             date: {
                 get: function () {
-                    return self._date;
+                    return self.submitDate;
                 },
                 set: function (value) {
                     self._date = value;
@@ -500,7 +502,7 @@ SweetDatePicker.prototype.updateUI = function () {
 
         part.el.querySelector('.metric').value = part.value.display;
         if (part.captionFormat) {
-            part.el.querySelector('.comment').innerText = this.date.format(part.captionFormat);
+            part.el.querySelector('.comment').innerText = this._date.format(part.captionFormat);
         } else if (part.caption) {
             part.el.querySelector('.comment').innerText = part.caption;
         }
@@ -521,12 +523,13 @@ SweetDatePicker.prototype.set = function () {
 };
 
 SweetDatePicker.prototype.updateInputs = function () {
+    this.submitDate = this._date;
     this.input.value = this._date.format(this.settings.displayFormat);
     this.submitInput.value = this._date.format(this.settings.submitFormat);
 };
 
 SweetDatePicker.prototype.clear = function () {
-
+    this.submitDate = null;
     this.input.value = '';
     this.submitInput .value = '';
     this.fireEvent('clear');
