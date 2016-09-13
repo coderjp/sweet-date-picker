@@ -53,7 +53,12 @@
 
         if (! this._date || ! this._date.isValid()) {
             initialisedWithDate = false;
-            this._date = moment();
+            if (this.settings.defaultDate instanceof Object) {
+                this._date = this.settings.defaultDate;
+            } else {
+                this._date = moment(this.settings.defaultDate, this.settings.submitFormat)
+            }
+
         }
 
         // Enforce the max date on init
@@ -602,7 +607,8 @@ SweetDatePicker.defaults =  {
     showClear: true,
     steps: {},
     debounceWait: 400,
-    holdInterval: 50
+    holdInterval: 50,
+    defaultDate: moment()
 };
 
 SweetDatePicker.lookup = function (format) {

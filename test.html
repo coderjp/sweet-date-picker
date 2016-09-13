@@ -5,13 +5,14 @@
         <link href="dist/sweet-date-picker.css" rel="stylesheet">
     </head>
     <body>
-        <input type="text" name="date" data-value="2000-01-02" id="date">
+        <input type="text" name="date" id="date">
         <input type="text" name="date" id="time">
         <script src="bower_components/moment/moment.js"></script>
         <script src="dist/sweet-date-picker.js"></script>
         <script>
             var myDate = sdp(document.querySelector('#date'), {
-                maxDate: moment('2016-12-25', 'YYYY-MM-DD')
+                maxDate: moment('2016-12-25', 'YYYY-MM-DD'),
+                defaultDate: '2010-11-12'
             });
 
             myDate.on('set', function(e) {
