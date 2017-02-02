@@ -33,6 +33,7 @@
             };
         }
 
+        // TODO
         Object.defineProperties(this, {
             date: {
                 get: function () {
@@ -142,6 +143,7 @@
 
         if (! part.method) part.method = part.unit;
 
+        // TODO
         part.step = self.settings.steps[part.format] || part.step;
 
         Object.defineProperty(part, 'value', {

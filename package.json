@@ -1,20 +1,26 @@
 {
   "name": "sweet-date-picker",
-  "version": "0.1.0",
-  "description": "Modern Date Picker",
-  "main": "Gulpfile.js",
+  "version": "1.0.0",
+  "description": "Sweet Date Picker",
+  "main": "lib/library.js",
   "dependencies": {
-    "autoprefixer": "^6.4.0",
-    "gulp": "^3.9.1",
-    "gulp-postcss": "^6.1.1",
-    "gulp-sass": "^2.3.2"
   },
   "devDependencies": {
-    "gulp-rename": "^1.2.2",
-    "gulp-uglify": "^2.0.0"
+    "babel": "^6.5.2",
+    "babel-core": "^6.22.1",
+    "babel-eslint": "^7.1.1",
+    "babel-loader": "^6.2.10",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-preset-es2015": "^6.22.0",
+    "chai": "^3.5.0",
+    "eslint": "^3.14.1",
+    "eslint-loader": "^1.6.0",
+    "mocha": "^3.2.0",
+    "webpack": "^2.2.1"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "WEBPACK_ENV=build webpack",
+    "dev": "WEBPACK_ENV=dev webpack --progress --colors --watch"
   },
   "repository": {
     "type": "git",
