@@ -1,0 +1,1 @@
+window.SweetDatePicker = require('./sweet-date-picker.es6.js');

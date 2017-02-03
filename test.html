@@ -8,26 +8,24 @@
         <input type="text" name="date" id="date">
         <input type="text" name="date" id="time">
         <script src="bower_components/moment/moment.js"></script>
-        <script src="src/sweet-date-picker.es6.js"></script>
+        <!--<script src="src/sweet-date-picker.es6.js"></script>-->
+        <script src="dist/sweet-date-picker-dev.js"></script>
         <script>
 
-            var foo = new SweetDatePicker(document.querySelector('#date'), {
+            var myDate = new SweetDatePicker(document.querySelector('#date'), {
                 maxDate: moment('2016-12-25', 'YYYY-MM-DD'),
                 defaultDate: '2010-11-12'
             });
 
-//            var myDate = sdp(document.querySelector('#date'), {
-//                maxDate: moment('2016-12-25', 'YYYY-MM-DD'),
-//                defaultDate: '2010-11-12'
-//            });
-//
-//            myDate.on('set', function(e) {
-//                console.log(e);
-//            });
-//
-//            myDate.on('clear', function(e) {
-//                console.log(e);
-//            });
+
+
+            myDate.addListener('set', function(e) {
+                console.log(e);
+            });
+
+            myDate.addListener('clear', function(e) {
+                console.log(e);
+            });
 
 //            sdp(document.querySelector('#time'), {
 //                format: 'HH mm',

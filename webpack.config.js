@@ -1,9 +1,15 @@
 var webpack = require('webpack');
 var path = require('path');
 var UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var env = process.env.WEBPACK_ENV;
 var libraryName = 'library';
-var plugins = [], outputFile;
+var plugins = [
+    new ExtractTextPlugin({ filename: '../dist/sweet-date-picker.css',
+        allChunks: true
+    })
+];
+var outputFile;
 
 if (env === 'build') {
     plugins.push(new UglifyJsPlugin({ minimize: true }));
@@ -33,12 +39,17 @@ var config = {
                 test: /(\.jsx|\.js)$/,
                 loader: "eslint-loader",
                 exclude: /node_modules/
+            },
+            {
+                test: /\.scss$/,
+                loader: ExtractTextPlugin.extract('css-loader!sass-loader')
             }
         ]
     },
     resolve: {
         modules: [
-            path.resolve('./src')
+            path.resolve('./src'),
+            path.resolve('./node_modules'),
         ],
         extensions: ['.js']
     },

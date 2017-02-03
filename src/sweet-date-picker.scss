@@ -27,10 +27,7 @@ html.sdp-freeze body {
   box-shadow: 0 0 23px 15px rgba(0, 0, 0, 0.24);
   border-radius: 6px;
   user-select: none;
-
-  &.shown {
-    transform: translateY(-50%) translateX(-50%);
-  }
+  transform: translateY(-50%) translateX(-50%);
 
   &.touch {
     .sdp-container .sdp-date-segment button {
@@ -41,6 +38,10 @@ html.sdp-freeze body {
         color: lighten(#000, 30%);
       }
     }
+  }
+
+  &.hide {
+    display: none;
   }
 
   .close {
@@ -218,6 +219,10 @@ html.sdp-freeze body {
   right: 0;
   bottom: 0;
   z-index: 9999;
+
+  &.hide {
+    display: none;
+  }
 }
 
 @media (max-width: $modal-width) {
