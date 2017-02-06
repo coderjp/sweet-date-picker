@@ -47,12 +47,11 @@ gulp.task('scripts', function () {
         .pipe(gulp.dest('dist')); // User version
 });
 
-gulp.task('default', ['scripts', 'sass'], function() {
+gulp.task('default', ['scripts', 'commonjs', 'sass'], function() {
 
 });
 
-
 gulp.task('watch',function() {
     gulp.watch('./src/*.scss',['sass']);
-    gulp.watch('./src/*.js',['scripts']);
+    gulp.watch('./src/*.js',['scripts', 'commonjs']);
 });
