@@ -4,6 +4,7 @@ import defaults from './modules/defaults';
 import render from './modules/render';
 import Backdrop from './modules/backdrop';
 import Part from './modules/part';
+import Modal from './modules/modal';
 
 import { isTouch } from './modules/helpers';
 
@@ -15,7 +16,7 @@ export default class SweetDatePicker {
 
         sweetDatePickers.push(this);
 
-        this.settings = Object.assign({}, config, defaults);
+        this.settings = Object.assign({}, defaults, config);
 
         this.listeners = new Map();
 
@@ -70,14 +71,20 @@ export default class SweetDatePicker {
     }
 
     initializeDate() {
-        const rawValue = this.getValue();
 
-        console.log(rawValue, this.settings.defaultDate, this.input.getAttribute('data-value'));
+        const rawValue = this.getValue();
 
         this.assign(rawValue || this.settings.defaultDate || this.input.getAttribute('data-value'));
 
         if (!this._dateMoment || !this._dateMoment.isValid()) {
             this.assign(this.settings.defaultDate);
+        }
+
+        // We need the parts so we can round the date to the appropriate amount of steps
+        this.createParts();
+
+        for (const part of this.parts) {
+            part.recalculate();
         }
     }
 
@@ -94,15 +101,26 @@ export default class SweetDatePicker {
         }
 
         Backdrop.show();
-        this.modal.classList.remove('hide');
+        this.modal.show();
 
     }
 
     initializeModal() {
 
-        this.buildModal();
+        this.modal = new Modal({showClear: this.settings.showClear});
 
-        // Create the parts
+        this.modal.addListener('clear', () => this.clear());
+        this.modal.addListener('set', () => this.set());
+
+        this.modal.render();
+
+        for (const part of this.parts) {
+            this.modal.addPart(part);
+        }
+
+    }
+
+    createParts() {
         const formatParts = this.settings.format.split(' ');
 
         for (let format of formatParts) {
@@ -137,12 +155,7 @@ export default class SweetDatePicker {
 
             });
 
-            // TODO - don't like need ref to container
-            this.modal.querySelector('.sdp-container').appendChild(part.render())
-
         }
-
-
     }
 
     initializeForm() {
@@ -163,55 +176,10 @@ export default class SweetDatePicker {
         this.parts[next].focus();
     }
 
-    buildModal() {
-
-        this.modal = render('div.sdp-modal.hide');
-        if (isTouch()) {
-            this.modal.classList.add('touch');
-        }
-
-        let closeBtn = render('button.close');
-        closeBtn.onclick = () => this.constructor.hide();
-        this.modal.appendChild(closeBtn);
-
-        let container = render('div.sdp-container');
-
-        this.modal.appendChild(container);
-
-        // Actions
-        let actionContainer = render('div.sdp-actions');
-        let clearBtnWrapper = render('div.sdp-btn-wrapper');
-        let clearBtn = render('button.sdp-clear');
-        let setBtnWrapper = render('div.sdp-btn-wrapper');
-        let setBtn = render('button.sdp-set');
-
-        clearBtnWrapper.appendChild(clearBtn);
-        setBtnWrapper.appendChild(setBtn);
-
-        clearBtn.innerText = 'Clear';
-
-        setBtn.innerText = 'Set';
-
-        if (this.settings.showClear) {
-            actionContainer.appendChild(clearBtnWrapper);
-            clearBtn.onclick = () => this.clear();
-        }
-
-        actionContainer.appendChild(setBtnWrapper);
-
-        setBtn.onclick = () => {
-            this.updateForm();
-            this.constructor.hide();
-        };
-
-        this.modal.appendChild(actionContainer);
-
-        document.querySelector('body').appendChild(this.modal);
-
-    }
-
     set() {
-
+        this.updateForm();
+        this.constructor.hide();
+        this.emit('set', this);
     }
 
     updateForm() {
@@ -223,12 +191,15 @@ export default class SweetDatePicker {
         this.input.value = '';
         this.submitInput.value = '';
         this.constructor.hide();
-        //TODO - Implement clear event
+        this.emit('clear', this);
     }
 
     static hide() {
+        console.log(sweetDatePickers);
         for (let picker of sweetDatePickers) {
-            picker.modal.classList.add('hide');
+            if (picker.modal) {
+                picker.modal.hide();
+            }
         }
 
         Backdrop.hide();
@@ -260,7 +231,12 @@ export default class SweetDatePicker {
 }
 
 if (typeof window !== 'undefined') {
-window.SweetDatePicker = window.sdp = SweetDatePicker;
+window.SweetDatePicker = SweetDatePicker;
+
+    window.sdp = (input, config) => {
+        return new SweetDatePicker(input, config)
+    };
+
 } else {
 alert('Sweet Date Picker is a frontend module and requires the window var.')
 }

@@ -1,11 +1,13 @@
 @import "sass/mixins";
+@import "../node_modules/animatewithsass/properties";
+@import "../node_modules/animatewithsass/_attention-seekers/shake";
 
 $sdp-color: #42a5f5;
 $gutter: 10px;
 $part-width: 120px;
 $part-gutter: 4px;
 $parts: 3;
-$container-width: ($part-width * 3) + ($part-gutter * ($parts * 2));
+$container-width: ($part-width * $parts) + ($part-gutter * ($parts * ($parts - 1)));
 $modal-width: $container-width + ($gutter * 2);
 
 html.sdp-freeze body {
@@ -119,9 +121,15 @@ html.sdp-freeze body {
           padding: 5px 15px;
           -webkit-text-fill-color: rgba(0, 0, 0, 1);
           -webkit-opacity: 1;
+
           &:disabled {
             color: #000000;
           }
+
+          &.error {
+            @include shake($duration: 0.6s);
+          }
+
         }
 
         .comment {
@@ -231,7 +239,7 @@ html.sdp-freeze body {
     .sdp-container {
       width: auto;
       .sdp-date-segment-col {
-        @for $i from 1 through 4 {
+        @for $i from 1 through 6 {
           @include sibling-width($i);
         }
 
@@ -268,12 +276,32 @@ html.sdp-freeze body {
 }
 
 @media (max-width: 300px) {
-  .sdp-modal .sdp-container .sdp-date-segment {
-    .metric {
-      font-size: 20px;
+  .sdp-modal {
+
+    border-radius: 0;
+
+    .sdp-container .sdp-date-segment {
+      .metric {
+        font-size: 20px;
+      }
+      .comment {
+        font-size: 12px;
+      }
     }
-    .comment {
-      font-size: 12px;
-    }
+
+  }
+}
+
+@keyframes shake {
+  from, to {
+    transform: translate3d(0, 0, 0);
+  }
+
+  10%, 30%, 50%, 70%, 90% {
+    transform: translate3d(-10px, 0, 0);
+  }
+
+  20%, 40%, 60%, 80% {
+    transform: translate3d(10px, 0, 0);
   }
 }

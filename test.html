@@ -1,7 +1,12 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css" />
         <link href="dist/sweet-date-picker.css" rel="stylesheet">
     </head>
     <body>
@@ -14,29 +19,30 @@
 
             var myDate = new SweetDatePicker(document.querySelector('#date'), {
                 maxDate: moment('2016-12-25', 'YYYY-MM-DD'),
+//                format: 'D M YYYY HH mm',
                 defaultDate: '2010-11-12'
             });
 
-
-
-            myDate.addListener('set', function(e) {
-                console.log(e);
+            myDate.addListener('set', function(picker) {
+                console.log('Set Event Triggered', picker);
             });
 
-            myDate.addListener('clear', function(e) {
-                console.log(e);
+            myDate.addListener('clear', function(picker) {
+                console.log('Clear Event Triggered', picker);
             });
 
-//            sdp(document.querySelector('#time'), {
-//                format: 'HH mm',
-//                displayFormat: 'HH:mm',
-//                steps: {
-//                    mm: 15
-//                },
-//                onClear: function (e) {
-//                    console.log(e);
-//                }
-//            });
+            var myTime = sdp(document.querySelector('#time'), {
+                format: 'HH mm',
+                displayFormat: 'HH:mm',
+                steps: {
+                    mm: 15
+                }
+            });
+
+            myTime.addListener('clear', function () {
+                console.log('Time has been cleared');
+            });
+
         </script>
     </body>
 </html>

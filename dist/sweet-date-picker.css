@@ -1,3 +1,14 @@
+@keyframes shake {
+  0%, 100% {
+    -ms-transform: translateX(0);
+    transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% {
+    -ms-transform: translateX(-10px);
+    transform: translateX(-10px); }
+  20%, 40%, 60%, 80% {
+    -ms-transform: translateX(10px);
+    transform: translateX(10px); } }
+
 html.sdp-freeze body {
   overflow: hidden; }
 
@@ -87,6 +98,15 @@ html.sdp-freeze body {
         -webkit-opacity: 1; }
         .sdp-modal .sdp-container .sdp-date-segment .metric:disabled {
           color: #000000; }
+        .sdp-modal .sdp-container .sdp-date-segment .metric.error {
+          animation-name: shake;
+          animation-iteration-count: 1s;
+          animation-duration: 0.6s;
+          animation-delay: 0s;
+          animation-timing-function: ease;
+          animation-fill-mode: both;
+          -webkit-backface-visibility: hidden;
+          backface-visibility: hidden; }
       .sdp-modal .sdp-container .sdp-date-segment .comment {
         text-transform: uppercase;
         font-size: 14px;
@@ -180,6 +200,28 @@ html.sdp-freeze body {
         width: 25%; }
       .sdp-modal .sdp-container .sdp-date-segment-col:nth-child(4):nth-last-child(1) {
         width: 25%; }
+      .sdp-modal .sdp-container .sdp-date-segment-col:nth-child(1):nth-last-child(5) {
+        width: 20%; }
+      .sdp-modal .sdp-container .sdp-date-segment-col:nth-child(2):nth-last-child(4) {
+        width: 20%; }
+      .sdp-modal .sdp-container .sdp-date-segment-col:nth-child(3):nth-last-child(3) {
+        width: 20%; }
+      .sdp-modal .sdp-container .sdp-date-segment-col:nth-child(4):nth-last-child(2) {
+        width: 20%; }
+      .sdp-modal .sdp-container .sdp-date-segment-col:nth-child(5):nth-last-child(1) {
+        width: 20%; }
+      .sdp-modal .sdp-container .sdp-date-segment-col:nth-child(1):nth-last-child(6) {
+        width: 16.66667%; }
+      .sdp-modal .sdp-container .sdp-date-segment-col:nth-child(2):nth-last-child(5) {
+        width: 16.66667%; }
+      .sdp-modal .sdp-container .sdp-date-segment-col:nth-child(3):nth-last-child(4) {
+        width: 16.66667%; }
+      .sdp-modal .sdp-container .sdp-date-segment-col:nth-child(4):nth-last-child(3) {
+        width: 16.66667%; }
+      .sdp-modal .sdp-container .sdp-date-segment-col:nth-child(5):nth-last-child(2) {
+        width: 16.66667%; }
+      .sdp-modal .sdp-container .sdp-date-segment-col:nth-child(6):nth-last-child(1) {
+        width: 16.66667%; }
       .sdp-modal .sdp-container .sdp-date-segment-col button {
         height: 45px;
         line-height: 45px; }
@@ -196,7 +238,17 @@ html.sdp-freeze body {
       font-size: 12px; } }
 
 @media (max-width: 300px) {
-  .sdp-modal .sdp-container .sdp-date-segment .metric {
-    font-size: 20px; }
-  .sdp-modal .sdp-container .sdp-date-segment .comment {
-    font-size: 12px; } }
+  .sdp-modal {
+    border-radius: 0; }
+    .sdp-modal .sdp-container .sdp-date-segment .metric {
+      font-size: 20px; }
+    .sdp-modal .sdp-container .sdp-date-segment .comment {
+      font-size: 12px; } }
+
+@keyframes shake {
+  from, to {
+    transform: translate3d(0, 0, 0); }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translate3d(-10px, 0, 0); }
+  20%, 40%, 60%, 80% {
+    transform: translate3d(10px, 0, 0); } }

@@ -6,8 +6,8 @@ let defaults = {
     tabFill: true,
     showClear: true,
     steps: {},
-    debounceWait: 4000,
-    holdInterval: 50,
+    debounceWait: 400,
+    holdInterval: 100,
     defaultDate: moment()
 };
 
