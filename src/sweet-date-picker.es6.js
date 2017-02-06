@@ -131,8 +131,6 @@ export default class SweetDatePicker {
 
             let index = this.parts.length - 1;
 
-            part.setPosition(index);
-
             if (this.settings.steps[format]) {
                 part.setSteps(this.settings.steps[format]);
             }
@@ -195,7 +193,7 @@ export default class SweetDatePicker {
     }
 
     static hide() {
-        console.log(sweetDatePickers);
+
         for (let picker of sweetDatePickers) {
             if (picker.modal) {
                 picker.modal.hide();

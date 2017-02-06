@@ -22,10 +22,6 @@ export default class Part {
 
     }
 
-    setPosition(position) {
-        this.position = position;
-    }
-
     setSteps(steps) {
         this.part.step = steps;
     }
@@ -143,7 +139,6 @@ export default class Part {
     }
 
     recalculate() {
-        console.log(this.value);
         this.value = this.value.numeric;
     }
 
