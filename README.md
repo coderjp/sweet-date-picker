@@ -1,18 +1,18 @@
 # Sweet Date Picker
 
-**This readme is a work in progress**
-
 Sweet Date Picker is a modern date picker that works on desktops and mobile devices. It was created out of frustration of other date pickers not working on all screen sizes / devices. Those that did, had a dated user interface.
 
 ## Installation
 
-You can install Sweet Date Picker using Bower
+You can install Sweet Date Picker the following ways:
 
 ```
+#NPM
+npm install sweet-date-picker
+
+# Bower
 bower install sweet-date-picker
 ```
-
-Sweet Date picker depends on the [Moment.js] library. Bower will install this as a dependency if you don't already have it. Don't forget to add Moment.js into you application.
 
 ## Browser Support
 

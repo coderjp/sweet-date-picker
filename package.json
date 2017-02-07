@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Sweet Date Picker",
   "main": "lib/sweet-date-picker.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/coderjp/sweet-date-picker"
+  },
   "dependencies": {
     "moment": "^2.17.1"
   },
@@ -22,10 +26,6 @@
     "gulp-wrap": "^0.13.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": " "
   },
   "keywords": [
     "date",
