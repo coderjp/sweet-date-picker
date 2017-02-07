@@ -1,6 +1,6 @@
 {
   "name": "sweet-date-picker",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Sweet Date Picker",
   "main": "lib/sweet-date-picker.js",
   "repository": {
