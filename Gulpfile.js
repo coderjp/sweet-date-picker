@@ -27,7 +27,7 @@ gulp.task('commonjs', function () {
        .pipe(gulp.dest('lib'));
 });
 
-// Bundled JS
+
 gulp.task('scripts', function () {
     return browserify({
         entries: './src/sweet-date-picker.es6.js',

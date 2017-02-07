@@ -2,7 +2,7 @@
   "name": "sweet-date-picker",
   "version": "1.0.0",
   "description": "Sweet Date Picker",
-  "main": "lib/library.js",
+  "main": "lib/sweet-date-picker.js",
   "dependencies": {
     "moment": "^2.17.1"
   },
