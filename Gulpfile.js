@@ -25,6 +25,10 @@ gulp.task('commonjs', function () {
        .pipe(babel())
        .pipe(rename('sweet-date-picker.js'))
        .pipe(gulp.dest('lib'));
+
+    gulp.src('./src/modules/*.js')
+        .pipe(babel())
+        .pipe(gulp.dest('lib/modules'));
 });
 
 
