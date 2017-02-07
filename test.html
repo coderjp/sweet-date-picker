@@ -11,14 +11,13 @@
     </head>
     <body>
         <input type="text" name="date" id="date">
-        <input type="text" name="date" id="time">
-        <script src="bower_components/moment/moment.js"></script>
-        <!--<script src="src/sweet-date-picker.es6.js"></script>-->
+        <input type="text" name="time" id="time">
         <script src="dist/sweet-date-picker-dev.js"></script>
+        <!--<script src="dist/sweet-date-picker.bundle.min.js"></script>-->
         <script>
 
             var myDate = new SweetDatePicker(document.querySelector('#date'), {
-                maxDate: moment('2016-12-25', 'YYYY-MM-DD'),
+//                maxDate: moment('2016-12-25', 'YYYY-MM-DD'),
 //                format: 'D M YYYY HH mm',
                 defaultDate: '2010-11-12'
             });

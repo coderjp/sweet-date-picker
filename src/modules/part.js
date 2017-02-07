@@ -1,3 +1,4 @@
+import moment from 'moment';
 import render from './render';
 import PushHoldEvent from './push-hold-event';
 import formatLookup from './formats';

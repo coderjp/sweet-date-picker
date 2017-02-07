@@ -4,8 +4,6 @@
 
 Sweet Date Picker is a modern date picker that works on desktops and mobile devices. It was created out of frustration of other date pickers not working on all screen sizes / devices. Those that did, had a dated user interface.
 
-**This library is in Alpha. Use in Production is not yet recommended.**
-
 ## Installation
 
 You can install Sweet Date Picker using Bower
@@ -54,17 +52,9 @@ sdp(document.querySelector('#myDate', {
 |allowInput         | true                     | Boolean    | Whilst the date picker is open, if the user clicks one of the numeric values instead of the up / down arrows, allow them to type the value. Note: This is disabled on mobile devices|
 |tabFill            | true                     | Boolean    | If tabFill is true, once a user has used the keyboard to enter a value for the first segment, they are automatcially moved on to the next|
 |showClear          | true                     | Boolean    | Show the clear button in the date picker|
-|steps              | {}                       | Object     |Steps allows you to force certain segments to  increase / decrease in chunks instead of one at a time. Use the token in your display format to key the steps. For example ```` {YYYY : 2, M: 6}```` would make 1 click on the up arrow for the year increase it by 2, for the months it would increase it by 6.|
+|steps              | {}                       | Object     | Steps allows you to force certain segments to  increase / decrease in chunks instead of one at a time. Use the token in your display format to key the steps. For example ```` {YYYY : 2, M: 6}```` would make 1 click on the up arrow for the year increase it by 2, for the months it would increase it by 6.|
 |debounceWait       | 400                      | Integer    | Holding an arrow will make the value increase / decrease rapidly. This value is how many milliseconds the user should hold the arrow before we start changing the value rapidly. If the user presses the arrow for any time under this value, then it is classed as a click and will increase / decrease it by 1.
-|holdInterval       | 50                       | Integer    |How often in milliseconds we should change the value when an arrow is being held down. Increase it to slow down the rate or make it smaller to make the value change quicker.|
+|holdInterval       | 100                      | Integer    | How often in milliseconds we should change the value when an arrow is being held down. Increase it to slow down the rate or make it smaller to make the value change quicker.|
 |maxDate            | undefined                | Moment     | Don't let the date picker go past this date. This is a moment instance, for example if you want to set the maxDate to today use ```{maxDate: moment()}```.
-
-## jQuery
-
-If you are using jQuery you can use the following instead
-
-```
-$('#myDate).sdp()
-```
 
 [Moment.js]: http://momentjs.com/

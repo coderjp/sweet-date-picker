@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 let defaults = {
     format: 'D M YYYY',
     displayFormat: 'dddd, MMMM Do YYYY',

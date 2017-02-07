@@ -1,5 +1,6 @@
 'use strict';
 
+import moment from 'moment';
 import defaults from './modules/defaults';
 import render from './modules/render';
 import Backdrop from './modules/backdrop';
